@@ -1,0 +1,45 @@
+# version: "3.9"
+
+services:
+  api-stripe-demo:
+    image: api-stripe-demo
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    volumes:
+      - .:/home/node/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      # DB_HOST: mysql
+      # DB_PORT: 3306
+      # DB_USERNAME: root
+      # DB_PASSWORD: root
+      # DB_NAME: stripe_demo
+    command: tail -f /dev/null
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: stripe_demo
+    ports:
+      - "3306:3306"
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:

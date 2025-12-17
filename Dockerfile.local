@@ -1,0 +1,17 @@
+# Usa imagem base Debian/Ubuntu (glibc)
+FROM mcr.microsoft.com/devcontainers/javascript-node:20
+
+# Atualiza pacotes e instala bash (libc6 já vem com glibc por padrão)
+RUN apt-get update && apt-get install -y bash && rm -rf /var/lib/apt/lists/*
+
+# Instala ferramentas globais do NestJS e atualiza pacotes globais npm.
+RUN npm install -g @nestjs/cli
+
+# Define o usuário padrão para executar os comandos dentro do contêiner
+USER node
+
+# Define o diretório de trabalho padrão dentro do contêiner
+WORKDIR /home/node/app
+
+# Mantém o container rodando (útil para Dev Containers VS Code)
+CMD [ "tail","-f","/dev/null" ]
