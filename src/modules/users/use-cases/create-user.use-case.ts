@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import {
-  CreateStripeCustomer,
+  createStripeCustomer,
   getStripeCustomerByEmail,
 } from 'src/shared/utils/stripe';
 import type { IUserRepository } from '../repositories/user.repository';
@@ -25,7 +25,7 @@ export class CreateUserUseCase {
       throw new Error('Usuário já cadastrado.');
     }
 
-    const stripeCustomer = await CreateStripeCustomer({
+    const stripeCustomer = await createStripeCustomer({
       email: input.email,
       name: input.name,
     });

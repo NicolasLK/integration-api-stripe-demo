@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { envs } from './config/envs.config';
+import { CheckoutModule } from './modules/checkout/checkout.module';
 import { ProductsModule } from './modules/products/products.module';
 import { UsersModule } from './modules/users/users.module';
 
@@ -25,6 +26,7 @@ import { UsersModule } from './modules/users/users.module';
     }),
     UsersModule,
     ProductsModule,
+    CheckoutModule,
   ],
   controllers: [AppController],
 })

@@ -15,7 +15,7 @@ export const getStripeCustomerByEmail = async (email: string) => {
   return customer.data[0];
 };
 
-export const CreateStripeCustomer = async (data: {
+export const createStripeCustomer = async (data: {
   email: string;
   name?: string;
 }) => {
@@ -36,4 +36,33 @@ export const listStripeProducts = async () => {
   });
 
   return products.data;
+};
+
+export const generateCheckout = async (customerId: string, email: string) => {
+  try {
+    const customer = await createStripeCustomer({
+      email,
+    });
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'subscription',
+      client_reference_id: customerId,
+      customer: customer.id,
+      success_url: `http://localhost:3000/done`,
+      cancel_url: `http://localhost:3000/error`,
+      line_items: [
+        {
+          price: process.env.STRIPE_ID_PLAN,
+          quantity: 1,
+        },
+      ],
+    });
+
+    return {
+      url: session.url,
+    };
+  } catch (error) {
+    console.log('errr', error);
+  }
 };

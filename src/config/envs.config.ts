@@ -71,7 +71,7 @@ export const envs: IEnvs = {
     publicKey: getEnv('STRIPE_PUBLIC_KEY'),
     secretKey: getEnv('STRIPE_SECRET_KEY'),
     // webhookSecret: getEnv('STRIPE_WEBHOOK_SECRET'),
-    baseUrl: getEnv('STRIPE_API_BASE_URL'),
+    idPlan: getEnv('STRIPE_ID_PLAN'),
     apiVersion: process.env.STRIPE_API_VERSION || '2023-10-16',
   },
 };
