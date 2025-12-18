@@ -14,6 +14,7 @@ export interface IEnvs {
   stripe: {
     publicKey: string;
     secretKey: string;
+    baseUrl: string;
     apiVersion: string;
   };
 }

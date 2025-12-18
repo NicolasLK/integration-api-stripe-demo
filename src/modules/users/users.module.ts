@@ -4,6 +4,7 @@ import { TypeOrmUserRepository } from 'src/infra/database/repositories/typeorm-u
 import { UserSchema } from 'src/infra/database/schemas/user.schema';
 import { USER_REPOSITORY_PROVIDER } from './repositories/user.repository.provider';
 import { CreateUserUseCase } from './use-cases/create-user.use-case';
+import { GetUserByCustomerIdUseCase } from './use-cases/get-user-by-customer-id.use-case';
 import { UsersController } from './users.controller';
 
 @Module({
@@ -13,7 +14,12 @@ import { UsersController } from './users.controller';
     TypeOrmUserRepository,
     USER_REPOSITORY_PROVIDER,
     CreateUserUseCase,
+    GetUserByCustomerIdUseCase,
   ],
-  exports: [USER_REPOSITORY_PROVIDER, CreateUserUseCase],
+  exports: [
+    USER_REPOSITORY_PROVIDER,
+    CreateUserUseCase,
+    GetUserByCustomerIdUseCase,
+  ],
 })
 export class UsersModule {}

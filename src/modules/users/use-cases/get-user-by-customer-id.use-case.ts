@@ -1,0 +1,20 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { IUserRepository } from '../repositories/user.repository';
+
+@Injectable()
+export class GetUserByCustomerIdUseCase {
+  constructor(
+    @Inject('UserRepository')
+    private readonly userRepository: IUserRepository,
+  ) {}
+
+  async execute(id: string) {
+    const user = await this.userRepository.findByCustomerId(id);
+
+    if (!user) {
+      throw new Error('Usuário não encontrado.');
+    }
+
+    return user;
+  }
+}

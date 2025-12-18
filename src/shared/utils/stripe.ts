@@ -28,3 +28,12 @@ export const CreateStripeCustomer = async (data: {
     name: data?.name,
   });
 };
+
+export const listStripeProducts = async () => {
+  const products = await stripe.products.list({
+    active: true, // Retorna apenas produtos marcados como ativos no Dashboard
+    expand: ['data.default_price'], // Importante para trazer o preço junto com o produto
+  });
+
+  return products.data;
+};

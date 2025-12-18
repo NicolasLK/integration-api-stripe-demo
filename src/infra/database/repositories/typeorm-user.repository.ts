@@ -20,9 +20,9 @@ export class TypeOrmUserRepository implements IUserRepository {
     return UserMapper.toDomainEntity(saved);
   }
 
-  async findByEmail(email: string): Promise<UserEntity | null> {
+  async findByCustomerId(customerId: string): Promise<UserEntity | null> {
     const user = await this.repository.findOne({
-      where: { email },
+      where: { stripeCustomerId: customerId },
     });
 
     if (!user) {
@@ -32,5 +32,3 @@ export class TypeOrmUserRepository implements IUserRepository {
     return UserMapper.toDomainEntity(user);
   }
 }
-
-// npx typeorm migration:run -d src/config/db.config.ts

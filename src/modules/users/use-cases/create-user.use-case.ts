@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateStripeCustomer } from 'src/shared/utils/stripe';
+import {
+  CreateStripeCustomer,
+  getStripeCustomerByEmail,
+} from 'src/shared/utils/stripe';
 import type { IUserRepository } from '../repositories/user.repository';
 import { UserEntity } from '../user.entity';
 
@@ -16,11 +19,11 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(input: CreateUserInput): Promise<UserEntity> {
-    // const userExists = await this.userRepository.findByEmail(input.email);
+    const userExists = await getStripeCustomerByEmail(input.email);
 
-    // if (userExists) {
-    //   throw new Error('Usuário não encontrado');
-    // }
+    if (userExists) {
+      throw new Error('Usuário já cadastrado.');
+    }
 
     const stripeCustomer = await CreateStripeCustomer({
       email: input.email,
