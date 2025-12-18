@@ -1,7 +1,7 @@
 import { envs } from 'src/config/envs.config';
 import Stripe from 'stripe';
 
-export const stripe = new Stripe(envs.stripe.publicKey, {
+export const stripe = new Stripe(envs.stripe.secretKey, {
   httpClient: Stripe.createFetchHttpClient(),
 });
 
@@ -21,9 +21,7 @@ export const CreateStripeCustomer = async (data: {
 }) => {
   const customer = await getStripeCustomerByEmail(data?.email);
 
-  if (!customer) {
-    return customer;
-  }
+  if (customer) return customer;
 
   return stripe.customers.create({
     email: data?.email,

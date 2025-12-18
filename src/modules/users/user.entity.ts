@@ -1,6 +1,7 @@
 export class UserEntity {
   id: string;
   name: string;
+  email: string;
 
   // Stripe
   stripeSubscriptionStatus?: string;
@@ -13,12 +14,14 @@ export class UserEntity {
   constructor(props: {
     id: string;
     name: string;
+    email: string;
     stripeSubscriptionStatus?: string;
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
   }) {
     this.id = props.id;
     this.name = props.name;
+    this.email = props.email;
     this.stripeSubscriptionStatus = props.stripeSubscriptionStatus;
     this.stripeCustomerId = props.stripeCustomerId;
     this.stripeSubscriptionId = props.stripeSubscriptionId;

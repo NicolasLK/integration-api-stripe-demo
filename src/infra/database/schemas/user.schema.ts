@@ -19,6 +19,9 @@ export class UserSchema {
   })
   name: string;
 
+  @Column({ unique: true })
+  email: string;
+
   // ======================
   // STRIPE
   // ======================
@@ -54,6 +57,7 @@ export class UserSchema {
   @CreateDateColumn({
     name: 'created_at',
     type: 'timestamp',
+    precision: 0,
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
@@ -61,7 +65,9 @@ export class UserSchema {
   @UpdateDateColumn({
     name: 'updated_at',
     type: 'timestamp',
+    precision: 0,
     default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
 }

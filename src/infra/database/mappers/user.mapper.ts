@@ -11,6 +11,7 @@ export class UserMapper {
     return new UserEntity({
       id: schema.id,
       name: schema.name,
+      email: schema.email,
       stripeSubscriptionStatus: schema.stripeSubscriptionStatus,
       stripeCustomerId: schema.stripeCustomerId,
       stripeSubscriptionId: schema.stripeSubscriptionId,
@@ -27,6 +28,7 @@ export class UserMapper {
 
     schema.id = entity.id;
     schema.name = entity.name;
+    schema.email = entity.email;
     schema.stripeSubscriptionStatus = entity.stripeSubscriptionStatus;
     schema.stripeCustomerId = entity.stripeCustomerId;
     schema.stripeSubscriptionId = entity.stripeSubscriptionId;

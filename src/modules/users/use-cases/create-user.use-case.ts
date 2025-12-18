@@ -16,11 +16,11 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(input: CreateUserInput): Promise<UserEntity> {
-    const userExists = await this.userRepository.findByEmail(input.email);
+    // const userExists = await this.userRepository.findByEmail(input.email);
 
-    if (!userExists) {
-      throw new Error('Usuário não encontrado');
-    }
+    // if (userExists) {
+    //   throw new Error('Usuário não encontrado');
+    // }
 
     const stripeCustomer = await CreateStripeCustomer({
       email: input.email,
@@ -30,6 +30,7 @@ export class CreateUserUseCase {
     const user = new UserEntity({
       id: crypto.randomUUID(),
       name: input.name,
+      email: input.email,
       stripeCustomerId: stripeCustomer.id,
     });
 
