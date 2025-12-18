@@ -13,5 +13,8 @@ USER node
 # Define o diretório de trabalho padrão dentro do contêiner
 WORKDIR /home/node/app
 
+# Copia todo o conteúdo do diretório atual (local) para o diretório de trabalho no contêiner.
+COPY . .
+
 # Mantém o container rodando (útil para Dev Containers VS Code)
 CMD [ "tail","-f","/dev/null" ]

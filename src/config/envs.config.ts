@@ -36,6 +36,19 @@ function getEnvNumber(name: string): number {
 }
 
 /**
+ * Helper para booleano
+ */
+function getEnvBoolean(name: string, defaultValue = false): boolean {
+  const value = process.env[name];
+
+  if (value === undefined) {
+    return defaultValue;
+  }
+
+  return value === 'true' || value === '1';
+}
+
+/**
  * Configuração centralizada das variáveis de ambiente
  */
 export const envs: IEnvs = {
@@ -50,6 +63,8 @@ export const envs: IEnvs = {
     username: getEnv('DB_USERNAME'),
     password: getEnv('DB_PASSWORD'),
     name: getEnv('DB_NAME'),
+
+    logging: getEnvBoolean('DB_LOGGING', false),
   },
 
   stripe: {

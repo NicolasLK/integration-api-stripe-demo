@@ -20,7 +20,7 @@ import { UsersModule } from './modules/users/users.module';
       database: envs.database.name,
       autoLoadEntities: true,
       synchronize: false, // Nunca usar true em produção
-      logging: process.env.NODE_ENV === 'development',
+      logging: envs.database.logging,
     }),
     UsersModule,
   ],

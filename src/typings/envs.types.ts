@@ -9,6 +9,7 @@ export interface IEnvs {
     username: string;
     password: string;
     name: string;
+    logging: boolean;
   };
   stripe: {
     publicKey: string;
