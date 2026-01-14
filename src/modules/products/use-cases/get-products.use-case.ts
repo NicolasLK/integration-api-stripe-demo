@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Inject, Injectable } from '@nestjs/common';
 import { listStripeProducts } from 'src/shared/utils/stripe';
 import { IProductRepository } from '../repositories/product.repository';
@@ -20,7 +17,11 @@ export class GetProductsUseCase {
 
     return products.map((prod) => {
       // O campo default_price vem como um objeto se você usou o 'expand'
-      const price = prod.default_price as any;
+      const price = prod.default_price;
+
+      if (typeof price !== 'object' || price === null) {
+        throw new Error('Preço inválido ou não definido');
+      }
 
       return {
         id: prod.id,

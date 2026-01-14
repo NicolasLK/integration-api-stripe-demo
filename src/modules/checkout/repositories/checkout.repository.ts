@@ -1,5 +1,5 @@
 import { IFindAllGateway } from 'src/shared/repositories/i-base-repository';
 
-export interface IProductRepository extends IFindAllGateway<any> {
+export interface ICheckoutRepository extends IFindAllGateway<any> {
   findById?(id: string): Promise<any>;
 }
