@@ -9,8 +9,6 @@ export class ProductsController {
   async findAll() {
     const products = await this.GetProductsUseCase.execute();
 
-    console.log('ProductsController: products -> ', products);
-
     return {
       statusCode: HttpStatus.OK,
       data: products,

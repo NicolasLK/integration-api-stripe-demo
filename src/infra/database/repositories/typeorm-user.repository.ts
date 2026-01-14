@@ -31,4 +31,12 @@ export class TypeOrmUserRepository implements IUserRepository {
 
     return UserMapper.toDomainEntity(user);
   }
+
+  async findAll(): Promise<UserEntity[] | null> {
+    const users = await this.repository.find();
+
+    if (!users) return null;
+
+    return UserMapper.toDomainEntities(users);
+  }
 }
