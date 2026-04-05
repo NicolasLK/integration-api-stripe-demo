@@ -1,11 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { listStripeProducts } from 'src/shared/utils/stripe';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { PRODUCT_REPOSITORY } from '../repositories/product.repository';
 import { IProductRepository } from '../repositories/product.repository';
 
 @Injectable()
 export class GetProductsUseCase {
   constructor(
-    @Inject('ProductRepository')
+    @Inject(PRODUCT_REPOSITORY)
     private readonly productRepository: IProductRepository,
   ) {}
 
@@ -13,7 +13,11 @@ export class GetProductsUseCase {
     /**
      * Busca os produtos usando a função utilitária que criamos
      */
-    const products = await listStripeProducts();
+    const products = await this.productRepository.findAll();
+
+    if (products === null) {
+      throw new NotFoundException('Produtos Stripe não encontrados.');
+    }
 
     return products.map((prod) => {
       // O campo default_price vem como um objeto se você usou o 'expand'

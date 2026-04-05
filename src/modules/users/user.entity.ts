@@ -18,6 +18,8 @@ export class UserEntity {
     stripeSubscriptionStatus?: string;
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
   }) {
     this.id = props.id;
     this.name = props.name;
@@ -25,6 +27,8 @@ export class UserEntity {
     this.stripeSubscriptionStatus = props.stripeSubscriptionStatus;
     this.stripeCustomerId = props.stripeCustomerId;
     this.stripeSubscriptionId = props.stripeSubscriptionId;
+    this.createdAt = props.createdAt;
+    this.updatedAt = props.updatedAt;
   }
 
   // ======================

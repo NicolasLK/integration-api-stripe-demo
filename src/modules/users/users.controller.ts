@@ -24,8 +24,6 @@ export class UsersController {
   async create(@Body() body: { name: string; email: string }) {
     const newUser = await this.createUserUseCase.execute(body);
 
-    console.log('UsersController: newUser -> ', newUser);
-
     return {
       statusCode: HttpStatus.CREATED,
       message: 'Usuário cadastrado.',
@@ -46,8 +44,6 @@ export class UsersController {
   @Get(':customerId')
   async findByCustomerId(@Param('customerId') customerId: string) {
     const user = await this.getUserByCustomerId.execute(customerId);
-
-    console.log('UsersController: user -> ', user);
 
     return {
       statusCode: HttpStatus.OK,

@@ -60,7 +60,7 @@ export class UserSchema {
     precision: 0,
     default: () => 'CURRENT_TIMESTAMP',
   })
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({
     name: 'updated_at',
@@ -69,5 +69,5 @@ export class UserSchema {
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP',
   })
-  updatedAt: Date;
+  updatedAt?: Date;
 }

@@ -15,6 +15,8 @@ export class UserMapper {
       stripeSubscriptionStatus: schema.stripeSubscriptionStatus,
       stripeCustomerId: schema.stripeCustomerId,
       stripeSubscriptionId: schema.stripeSubscriptionId,
+      createdAt: schema.createdAt,
+      updatedAt: schema.updatedAt,
     });
   }
 
@@ -32,6 +34,8 @@ export class UserMapper {
     schema.stripeSubscriptionStatus = entity.stripeSubscriptionStatus;
     schema.stripeCustomerId = entity.stripeCustomerId;
     schema.stripeSubscriptionId = entity.stripeSubscriptionId;
+    schema.createdAt = entity.createdAt;
+    schema.updatedAt = entity.updatedAt;
 
     return schema;
   }

@@ -24,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: stripe_demo
     ports:
-      - '3306:3306'
+      - '3307:3306'
     command: --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
     volumes:
@@ -34,6 +34,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  stripe_cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    tty: true
+    stdin_open: true
+    depends_on:
+      - api-stripe-demo
 
 volumes:
   mysql_data:

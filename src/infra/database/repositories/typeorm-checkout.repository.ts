@@ -3,9 +3,10 @@ import { ICheckoutRepository } from 'src/modules/checkout/repositories/checkout.
 
 @Injectable()
 export class TypeormCheckoutRepository implements ICheckoutRepository {
-  findById?(id: string): Promise<any> {
+  findById(id: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
+
   findAll(): Promise<any[] | null> {
     throw new Error('Method not implemented.');
   }
