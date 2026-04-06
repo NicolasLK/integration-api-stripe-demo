@@ -15,6 +15,7 @@ export interface IEnvs {
     publicKey: string;
     secretKey: string;
     idPlan: string;
+    idPrice: string;
     apiVersion: string;
   };
 }

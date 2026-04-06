@@ -75,14 +75,14 @@ export const listStripeProducts = async (): Promise<Stripe.Product[]> => {
  * A sessão é vinculada a um cliente Stripe e a um plano
  * previamente configurado no Stripe.
  *
- * @param customerId Identificador do cliente na aplicação
+ * @param userId Identificador do cliente/usuário na aplicação
  * @param customerName Nome do cliente
  * @param email Email do cliente
  * @returns Objeto contendo a URL da sessão de checkout
  * @throws Erro caso o cliente Stripe seja inválido ou a sessão não seja criada
  */
 export const generateCheckout = async (
-  customerId: string,
+  userId: string,
   customerName: string,
   email: string,
 ): Promise<{ url: string }> => {
@@ -95,20 +95,20 @@ export const generateCheckout = async (
     throw new Error('Cliente Stripe inválido.');
   }
 
-  if (!process.env.STRIPE_ID_PLAN) {
-    throw new Error('STRIPE_ID_PLAN não configurado.');
+  if (!envs.stripe.idPrice) {
+    throw new Error('STRIPE_ID_PRICE não configurado.');
   }
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'subscription',
-    client_reference_id: customerId,
+    client_reference_id: userId,
     customer: customer.id,
     success_url: `http://localhost:3000/done`,
     cancel_url: `http://localhost:3000/error`,
     line_items: [
       {
-        price: process.env.STRIPE_ID_PLAN,
+        price: envs.stripe.idPrice,
         quantity: 1,
       },
     ],
