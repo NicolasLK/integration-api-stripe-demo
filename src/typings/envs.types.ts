@@ -14,6 +14,7 @@ export interface IEnvs {
   stripe: {
     publicKey: string;
     secretKey: string;
+    webhookSecret: string;
     idPlan: string;
     idPrice: string;
     apiVersion: string;

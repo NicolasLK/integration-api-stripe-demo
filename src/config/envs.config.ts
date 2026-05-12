@@ -70,7 +70,7 @@ export const envs: IEnvs = {
   stripe: {
     publicKey: getEnv('STRIPE_PUBLIC_KEY'),
     secretKey: getEnv('STRIPE_SECRET_KEY'),
-    // webhookSecret: getEnv('STRIPE_WEBHOOK_SECRET'),
+    webhookSecret: getEnv('STRIPE_WEBHOOK_SECRET'),
     idPlan: getEnv('STRIPE_ID_PLAN'),
     idPrice: getEnv('STRIPE_ID_PRICE'),
     apiVersion: process.env.STRIPE_API_VERSION || '2023-10-16',

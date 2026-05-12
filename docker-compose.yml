@@ -38,6 +38,13 @@ services:
   stripe_cli:
     image: stripe/stripe-cli:latest
     container_name: stripe-cli
+    command:
+      - listen
+      - --forward-to=http://api-stripe-demo:3000/webhook
+    env_file:
+      - .env.development
+    volumes:
+      - stripe_config:/root/.config/stripe
     tty: true
     stdin_open: true
     depends_on:
@@ -45,3 +52,4 @@ services:
 
 volumes:
   mysql_data:
+  stripe_config:
