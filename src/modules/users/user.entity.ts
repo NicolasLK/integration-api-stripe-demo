@@ -58,4 +58,14 @@ export class UserEntity {
     this.stripeCustomerId = customerId;
     this.updatedAt = new Date();
   }
+
+  updateStripeSubscription(subscriptionId: string, status: string): void {
+    if (!subscriptionId) {
+      throw new Error('SubscriptionId é obrigatório');
+    }
+
+    this.stripeSubscriptionId = subscriptionId;
+    this.stripeSubscriptionStatus = status;
+    this.updatedAt = new Date();
+  }
 }

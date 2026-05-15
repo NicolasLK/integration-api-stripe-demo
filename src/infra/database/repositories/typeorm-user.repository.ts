@@ -39,4 +39,23 @@ export class TypeOrmUserRepository implements IUserRepository {
 
     return UserMapper.toDomainEntities(users);
   }
+
+  async findById(id: string): Promise<UserEntity | null> {
+    const user = await this.repository.findOne({
+      where: { id },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return UserMapper.toDomainEntity(user);
+  }
+
+  async update(entity: UserEntity): Promise<UserEntity> {
+    const ormUser = UserMapper.toOrmSchema(entity);
+    const updated = await this.repository.save(ormUser);
+
+    return UserMapper.toDomainEntity(updated);
+  }
 }

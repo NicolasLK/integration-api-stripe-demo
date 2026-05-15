@@ -6,6 +6,7 @@ import { envs } from './config/envs.config';
 import { CheckoutModule } from './modules/checkout/checkout.module';
 import { ProductsModule } from './modules/products/products.module';
 import { UsersModule } from './modules/users/users.module';
+import { WebhookModule } from './modules/webhook/webhook.module';
 
 @Module({
   imports: [
@@ -21,12 +22,13 @@ import { UsersModule } from './modules/users/users.module';
       password: envs.database.password,
       database: envs.database.name,
       autoLoadEntities: true,
-      synchronize: false, // Nunca usar true em produção
+      synchronize: true, // Nunca usar true em produção
       logging: envs.database.logging,
     }),
     UsersModule,
     ProductsModule,
     CheckoutModule,
+    WebhookModule,
   ],
   controllers: [AppController],
 })

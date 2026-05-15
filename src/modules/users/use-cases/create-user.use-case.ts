@@ -3,7 +3,10 @@ import {
   getOrCreateStripeCustomer,
   getStripeCustomerByEmail,
 } from 'src/shared/utils/stripe';
-import type { IUserRepository } from '../repositories/user.repository';
+import {
+  USER_REPOSITORY,
+  type IUserRepository,
+} from '../repositories/user.repository';
 import { UserEntity } from '../user.entity';
 
 interface CreateUserInput {
@@ -14,7 +17,7 @@ interface CreateUserInput {
 @Injectable()
 export class CreateUserUseCase {
   constructor(
-    @Inject('UserRepository')
+    @Inject(USER_REPOSITORY)
     private readonly userRepository: IUserRepository,
   ) {}
 

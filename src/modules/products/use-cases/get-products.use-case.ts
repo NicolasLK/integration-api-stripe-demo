@@ -15,11 +15,16 @@ export class GetProductsUseCase {
      */
     const products = await this.productRepository.findAll();
 
-    if (products === null) {
+    if (!products || products.length === 0) {
       throw new NotFoundException('Produtos Stripe não encontrados.');
     }
 
-    return products.map((prod) => {
+    /**
+     * Filtrando apenas produtos ativos
+     * */
+    const productsActive = products.filter((prod) => prod.active);
+
+    return productsActive.map((prod) => {
       // O campo default_price vem como um objeto se você usou o 'expand'
       const price = prod.default_price;
 
