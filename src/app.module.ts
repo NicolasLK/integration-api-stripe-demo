@@ -22,7 +22,7 @@ import { WebhookModule } from './modules/webhook/webhook.module';
       password: envs.database.password,
       database: envs.database.name,
       autoLoadEntities: true,
-      synchronize: true, // Nunca usar true em produção
+      synchronize: false, // Nunca usar true em produção
       logging: envs.database.logging,
     }),
     UsersModule,
